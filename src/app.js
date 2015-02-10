@@ -113,6 +113,9 @@ var menuArray = [
 	},
 	{
 		title: "Functions"
+	},
+	{
+		title: "About"
 	}
 ];
 
@@ -161,8 +164,8 @@ menu.on("select", function(e) {
 						
 						todayArray.push(
 							{
-								title: (data.data.today[i].show_name),
-								subtitle: "S" + (data.data.today[i].season) + "E" + (data.data.today[i].episode) + " - " + (data.data.today[i].ep_name)
+								title: (data.data.today[i].show_name) + " - S" + (data.data.today[i].season) + "E" + (data.data.today[i].episode),
+								subtitle: (data.data.today[i].ep_name)
 							});
 					}
 				
@@ -215,8 +218,8 @@ menu.on("select", function(e) {
 						
 						soonArray.push(
 							{
-								title: (data.data.soon[i].show_name),
-								subtitle: "S" + (data.data.soon[i].season) + "E" + (data.data.soon[i].episode) + " - " + (data.data.soon[i].ep_name) + " - " + weekday[time.getUTCDay()]
+								title: (data.data.soon[i].show_name) + " - S" + (data.data.soon[i].season) + "E" + (data.data.soon[i].episode),
+								subtitle: (data.data.soon[i].ep_name) + " - " + weekday[time.getUTCDay()]
 							});
 					}
 				
@@ -263,12 +266,12 @@ menu.on("select", function(e) {
 				for(var i in data.data.later)
 					{
 						date = (data.data.later[i].airdate).split('-');
-						time = date[2] + '/' + date[3];
+						time = date[2] + '/' + date[1];
 						
 						laterArray.push(
 							{
-								title: (data.data.later[i].show_name),
-								subtitle: "S" + (data.data.later[i].season) + "E" + (data.data.later[i].episode) + " - " + (data.data.later[i].ep_name) + " - " + time
+								title: (data.data.later[i].show_name)  + " - S" + (data.data.later[i].season) + "E" + (data.data.later[i].episode),
+								subtitle: (data.data.later[i].ep_name) + " - " + time
 							});
 					}
 				
@@ -319,8 +322,8 @@ menu.on("select", function(e) {
 						
 						missedArray.push(
 							{
-								title: (data.data.missed[i].show_name),
-								subtitle: "S" + (data.data.missed[i].season) + "E" + (data.data.missed[i].episode) +  " - " + (data.data.missed[i].ep_name) + " - Last " + weekday[time.getUTCDay()]
+								title: (data.data.missed[i].show_name)  + " - S" + (data.data.missed[i].season) + "E" + (data.data.missed[i].episode),
+								subtitle: (data.data.missed[i].ep_name) + " - Last " + weekday[time.getUTCDay()]
 							});
 					}
 				
@@ -514,5 +517,15 @@ menu.on("select", function(e) {
 				console.log(error);
 			}
 			);
+		}
+	else if(e.item.title == "About")
+		{
+			var about = new UI.Card({
+				title: "PebbleBeard",
+				subtitle: "SickBeard for your wrist!",
+				body: "© Copyright 2015 Josh Walls.\nDisclamer: Piracy is bad."
+			});
+			
+			about.show();
 		}
 });
